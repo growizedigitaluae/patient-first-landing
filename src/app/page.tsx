@@ -42,17 +42,17 @@ export default function LandingPage() {
     // Dark Navy Background matching logo with full mobile padding safety
     <div className="min-h-screen bg-[#070B14] text-slate-200 flex flex-col justify-between selection:bg-[#E5C158]/30 selection:text-[#FDF6D8] font-sans relative overflow-x-hidden">
       
-      {/* Hero Background Image with Brand Blue & Luxury Gold Overlay */}
+      {/* Hero Background Image with Solid Deep Blue Overlay */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/hero-background.webp"
           alt="Healthcare Patient Consultation"
           fill
           priority
-          className="object-cover object-center opacity-30"
+          className="object-cover object-center "
         />
-        {/* Deep rich brand blue & dark gradient overlay for readability and luxury feel */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0A192F]/90 via-[#070B14]/95 to-[#070B14]" />
+        {/* Rich Solid Deep Blue Overlay matching your brand color (#0A192F) */}
+        <div className="absolute inset-0 bg-[#0A192F]/80" />
         
         {/* Subtle Luxury Gold Glow Accent */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#E5C158]/15 via-[#C5A059]/5 to-transparent rounded-full blur-[120px]" />
