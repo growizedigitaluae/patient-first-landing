@@ -84,9 +84,9 @@ export default function LandingPage() {
             <Phone className="w-3.5 h-3.5 text-[#E5C158] flex-shrink-0" />
             <span>+971 56 696 0486</span>
           </a>
-          <a href="mailto:info@patientsfirstworlwide.com" className="flex items-center gap-1.5 hover:text-[#E5C158] transition-colors">
+          <a href="mailto:info@patientsfirstworldwide.com" className="flex items-center gap-1.5 hover:text-[#E5C158] transition-colors">
             <Mail className="w-3.5 h-3.5 text-[#E5C158] flex-shrink-0" />
-            <span>info@patientsfirstworlwide.com</span>
+            <span>info@patientsfirstworldwide.com</span>
           </a>
         </div>
 
@@ -202,9 +202,9 @@ export default function LandingPage() {
               <Phone className="w-4 h-4 text-[#E5C158]" />
               <span>+971 56 696 0486</span>
             </a>
-            <a href="mailto:info@patientsfirstworlwide.com" className="flex items-center gap-2 hover:text-[#E5C158] transition-colors">
+            <a href="mailto:info@patientsfirstworldwide.com" className="flex items-center gap-2 hover:text-[#E5C158] transition-colors">
               <Mail className="w-4 h-4 text-[#E5C158]" />
-              <span>info@patientsfirstworlwide.com</span>
+              <span>info@patientsfirstworldwide.com</span>
             </a>
           </div>
 
