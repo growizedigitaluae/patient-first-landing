@@ -80,13 +80,13 @@ export default function LandingPage() {
 
         {/* Contact Details in Header (Optimized for Mobile stacking) */}
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-slate-300">
-          <a href="tel:+971566960456" className="flex items-center gap-1.5 hover:text-[#E5C158] transition-colors">
+          <a href="tel:+971566960486" className="flex items-center gap-1.5 hover:text-[#E5C158] transition-colors">
             <Phone className="w-3.5 h-3.5 text-[#E5C158] flex-shrink-0" />
-            <span>+971 56 696 0456</span>
+            <span>+971 56 696 0486</span>
           </a>
-          <a href="mailto:info@patientfirstworlwide.com" className="flex items-center gap-1.5 hover:text-[#E5C158] transition-colors">
+          <a href="mailto:info@patientsfirstworlwide.com" className="flex items-center gap-1.5 hover:text-[#E5C158] transition-colors">
             <Mail className="w-3.5 h-3.5 text-[#E5C158] flex-shrink-0" />
-            <span>info@patientfirstworlwide.com</span>
+            <span>info@patientsfirstworlwide.com</span>
           </a>
         </div>
 
@@ -198,13 +198,13 @@ export default function LandingPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 text-white text-xs sm:text-sm">
-            <a href="tel:+971566960456" className="flex items-center gap-2 hover:text-[#E5C158] transition-colors">
+            <a href="tel:+971566960486" className="flex items-center gap-2 hover:text-[#E5C158] transition-colors">
               <Phone className="w-4 h-4 text-[#E5C158]" />
-              <span>+971 56 696 0456</span>
+              <span>+971 56 696 0486</span>
             </a>
-            <a href="mailto:info@patientfirstworlwide.com" className="flex items-center gap-2 hover:text-[#E5C158] transition-colors">
+            <a href="mailto:info@patientsfirstworlwide.com" className="flex items-center gap-2 hover:text-[#E5C158] transition-colors">
               <Mail className="w-4 h-4 text-[#E5C158]" />
-              <span>info@patientfirstworlwide.com</span>
+              <span>info@patientsfirstworlwide.com</span>
             </a>
           </div>
 
