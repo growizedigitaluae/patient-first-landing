@@ -2,17 +2,39 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Clock, ArrowRight, CheckCircle2, Globe, HeartHandshake, Plane, Phone, Mail } from "lucide-react";
+import { Clock, ArrowRight, CheckCircle2, Globe, HeartHandshake, Plane, Phone, Mail, Loader2 } from "lucide-react";
 
 export default function LandingPage() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      // Add your API integration or lead collection logic here
-      setSubmitted(true);
+    if (!email) return;
+
+    setLoading(true);
+    setErrorMsg("");
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await response.json();
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setErrorMsg('Network error. Please check your connection.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -98,14 +120,25 @@ export default function LandingPage() {
                 placeholder="Enter your email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 bg-[#070B14] border border-slate-800 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#E5C158] transition-all shadow-inner"
+                disabled={loading}
+                className="flex-1 bg-[#070B14] border border-slate-800 rounded-xl px-4 sm:px-5 py-3.5 sm:py-4 text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#E5C158] transition-all shadow-inner disabled:opacity-50"
               />
               <button
                 type="submit"
-                className="bg-gradient-to-r from-[#E5C158] to-[#C5A059] hover:from-[#FDF6D8] hover:to-[#E5C158] text-[#070B14] font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl text-sm sm:text-base flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(229,193,88,0.3)] transition-all cursor-pointer transform hover:scale-[1.02]"
+                disabled={loading}
+                className="bg-gradient-to-r from-[#E5C158] to-[#C5A059] hover:from-[#FDF6D8] hover:to-[#E5C158] text-[#070B14] font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl text-sm sm:text-base flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(229,193,88,0.3)] transition-all cursor-pointer transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span>Stay Informed</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                {loading ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>Submitting...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Stay Informed</span>
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </>
+                )}
               </button>
             </form>
           ) : (
@@ -113,6 +146,10 @@ export default function LandingPage() {
               <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-[#E5C158] flex-shrink-0" />
               <p className="text-sm sm:text-base font-medium">Thank you. You are on the priority notification list.</p>
             </div>
+          )}
+
+          {errorMsg && (
+            <p className="mt-3 text-sm text-red-400 text-center font-medium">{errorMsg}</p>
           )}
         </div>
 
