@@ -208,7 +208,17 @@ export default function LandingPage() {
             </a>
           </div>
 
-          <p className="text-slate-300 text-xs tracking-wide">Digital Strategy by Growize</p>
+         <p className="text-slate-300 text-xs tracking-wide">
+            Digital Strategy by{" "}
+            <a 
+              href="https://www.gro-wize.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[#E5C158] hover:underline font-medium"
+            >
+              Growize
+            </a>
+          </p>
         </div>
       </footer>
     </div>
