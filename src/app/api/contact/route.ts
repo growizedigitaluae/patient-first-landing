@@ -12,8 +12,8 @@ export async function POST(request: Request) {
     }
 
     const data = await resend.emails.send({
-      from: 'Patient First Worldwide <info@patientfirstworlwide.com>', 
-      to: ['m.dayasena1980@gmail.com'], // Temporarily test with an outside email
+      from: 'Patient First Worldwide <onboarding@resend.dev>', 
+      to: ['m.dayasena1980@gmail.com'], // <-- Put your personal Gmail here for instant testing
       replyTo: email,
       subject: 'New Lead: Patient First Worldwide Launch Notification',
       html: `
