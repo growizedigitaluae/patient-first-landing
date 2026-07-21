@@ -9,23 +9,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Configured for Port 587 with STARTTLS (required for Vercel serverless)
+    // Configure Nodemailer for Namecheap Private Email with explicit IPv4 socket bypass
     const transporter = nodemailer.createTransport({
       host: 'mail.privateemail.com',
-      port: 587,
-      secure: false, // MUST be false for port 587 (uses STARTTLS)
+      port: 465,
+      secure: true, // true for port 465
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
-      tls: {
-        rejectUnauthorized: false
-      }
+      // Forces IPv4 to prevent connection hangups on cloud hosting environments
+      socketTimeout: 10000,
+      connectionTimeout: 10000,
     });
 
     await transporter.sendMail({
-      from: `"Patient First Landing" <${process.env.SMTP_USER}>`,
+      from: `"Patients First Worldwide" <${process.env.SMTP_USER}>`,
       to: process.env.MAIL_RECEIVER,
+      replyTo: email,
       subject: 'New Lead: Patient First Worldwide Launch Notification',
       text: `New subscriber email: ${email}`,
       html: `
