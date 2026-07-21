@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
@@ -9,22 +11,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Configured for Port 465 with SSL
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'mail.privateemail.com',
-      port: Number(process.env.SMTP_PORT) || 465,
-      secure: true, // true for port 465
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `"Patient First Landing" <${process.env.SMTP_USER}>`,
-      to: process.env.MAIL_RECEIVER,
+    const data = await resend.emails.send({
+      from: 'Patient First Worldwide <onboarding@resend.dev>', // Or your verified domain email later
+      to: [process.env.MAIL_RECEIVER || 'info@patientfirstworlwide.com'],
       subject: 'New Lead: Patient First Worldwide Launch Notification',
-      text: `New subscriber email: ${email}`,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; border-radius: 10px;">
           <h2 style="color: #0A192F;">New Lead Registered</h2>
@@ -35,9 +25,9 @@ export async function POST(request: Request) {
       `,
     });
 
-    return NextResponse.json({ success: true, message: 'Email sent successfully' });
+    return NextResponse.json({ success: true, data });
   } catch (error: any) {
-    console.error('SMTP Detailed Error:', error);
+    console.error('Resend Error:', error);
     return NextResponse.json({ error: error.message || 'Failed to send email' }, { status: 500 });
   }
 }
