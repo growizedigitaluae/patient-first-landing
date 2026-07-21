@@ -12,8 +12,8 @@ export async function POST(request: Request) {
     }
 
     const data = await resend.emails.send({
-      from: `Patient First Worldwide <info@patientfirstworlwide.com>`, // Use your verified domain email here
-      to: [process.env.MAIL_RECEIVER || 'info@patientfirstworlwide.com'],
+      from: 'Patient First Worldwide <info@patientfirstworlwide.com>', 
+      to: ['m.dayasena1980@gmail.com'], // Temporarily test with an outside email
       replyTo: email,
       subject: 'New Lead: Patient First Worldwide Launch Notification',
       html: `
