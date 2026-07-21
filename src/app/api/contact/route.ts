@@ -9,18 +9,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Configured for Port 587 with TLS
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'mail.privateemail.com',
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: false, // false for port 587, uses STARTTLS
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
-      tls: {
-        rejectUnauthorized: false
-      }
     });
 
     await transporter.sendMail({
@@ -39,8 +35,8 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ success: true, message: 'Email sent successfully' });
-  } catch (error: any) {
-    console.error('SMTP Detailed Error:', error);
-    return NextResponse.json({ error: error.message || 'Failed to send email' }, { status: 500 });
+  } catch (error) {
+    console.error('SMTP Error:', error);
+    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
   }
 }
