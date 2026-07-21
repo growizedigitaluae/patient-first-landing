@@ -9,18 +9,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Configure Namecheap Private Email SMTP transporter
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
-      secure: true, // true for port 465
+      secure: true,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
     });
 
-    // Send email notification to yourself
     await transporter.sendMail({
       from: `"Patient First Landing" <${process.env.SMTP_USER}>`,
       to: process.env.MAIL_RECEIVER,
