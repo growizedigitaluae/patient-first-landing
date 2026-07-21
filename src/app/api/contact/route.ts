@@ -9,18 +9,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Email is required' }, { status: 400 });
     }
 
-    // Configured for Port 587 with TLS
+    // Configured for Port 465 with SSL
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'mail.privateemail.com',
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: false, // false for port 587, uses STARTTLS
+      port: Number(process.env.SMTP_PORT) || 465,
+      secure: true, // true for port 465
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
-      tls: {
-        rejectUnauthorized: false
-      }
     });
 
     await transporter.sendMail({
